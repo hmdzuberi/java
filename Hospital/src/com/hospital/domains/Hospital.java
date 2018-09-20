@@ -52,47 +52,73 @@ public class Hospital {
 		if (this.specializations.containsKey(spec)) {
 
 			setOfDoctors = this.specializations.get(spec);
-		}
 
-		boolean var1 = setOfDoctors.add(doctor);
-		HashSet<Doctor> var2 = this.specializations.put(doctor.getSpecialization(), setOfDoctors);
+			boolean var1 = setOfDoctors.add(doctor);
+			HashSet<Doctor> var2 = this.specializations.put(doctor.getSpecialization(), setOfDoctors);
 
-		if (var1 && var2 == null) {
-			return "Doctor added and specialization updated";
+			if (var1 && var2 != null) {
+				return "Doctor added and specialization updated";
+			} else {
+				return "Doctor added but failed to update specialization";
+			}
+
 		} else {
-			return "Doctor added but failed to update specialization";
+
+			boolean var1 = setOfDoctors.add(doctor);
+			HashSet<Doctor> var2 = this.specializations.put(doctor.getSpecialization(), setOfDoctors);
+
+			if (var1 && var2 == null) {
+				return "Doctor added and specialization updated";
+			} else {
+				return "Doctor added but failed to update specialization";
+			}
+
 		}
 
 	}
 
-	public String fixAppointment(Doctor doctor, Patient patient, String appointmentTime) {
+	public String fixAppointment(String doctorName, Patient patient, String appointmentTime) {
 
 		patient.setAppointmentTime(appointmentTime);
 
-		if (this.setOfDoctors.contains(doctor)) {
+		boolean contains = false;
+		Doctor doctorAppt = new Doctor();
+		// this.setOfDoctors.contains(doctor)
+
+		for (Doctor doctor : this.setOfDoctors) {
+			if (doctor.getDoctorName().equals(doctorName)) {
+				doctorAppt = doctor;
+				contains = true;
+			}
+		}
+
+		if (contains) {
 
 			HashSet<Patient> setOfPatients = new HashSet<>();
 
-			if (this.appointments.containsKey(doctor)) {
-				setOfPatients = this.appointments.get(doctor);
-				
+			if (this.appointments.containsKey(doctorAppt)) {
+				setOfPatients = this.appointments.get(doctorAppt);
+
 				boolean var1 = setOfPatients.add(patient);
-				HashSet<Patient> var2 = this.appointments.put(doctor, setOfPatients);
+				HashSet<Patient> var2 = this.appointments.put(doctorAppt, setOfPatients);
 
 				if (var1 && var2 != null) {
 					return "Appointment added";
 				} else {
 					return "Failed to add apointment";
 				}
-			}
 
-			boolean var1 = setOfPatients.add(patient);
-			HashSet<Patient> var2 = this.appointments.put(doctor, setOfPatients);
-
-			if (var1 && var2 == null) {
-				return "Appointment added";
 			} else {
-				return "Failed to add apointment";
+
+				boolean var1 = setOfPatients.add(patient);
+				HashSet<Patient> var2 = this.appointments.put(doctorAppt, setOfPatients);
+
+				if (var1 && var2 == null) {
+					return "Appointment added";
+				} else {
+					return "Failed to add apointment";
+				}
+
 			}
 
 		} else {
