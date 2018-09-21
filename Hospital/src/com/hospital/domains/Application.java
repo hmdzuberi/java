@@ -28,13 +28,13 @@ public class Application {
 					System.out.print("\nPatient ID: ");
 					newPatient.setPatientId(Integer.parseInt(sc.nextLine()));
 
-					System.out.print("\nPatient's name: ");
+					System.out.print("Patient's name: ");
 					newPatient.setPatientName(sc.nextLine());
 
-					System.out.print("\nDoctor's name: ");
+					System.out.print("Doctor's name: ");
 					doctorName = sc.nextLine();
 
-					System.out.print("\nAppointment Time: ");
+					System.out.print("Appointment Time: ");
 
 					System.out.println(fortis.fixAppointment(doctorName, newPatient, sc.nextLine()));
 					break;
@@ -48,7 +48,6 @@ public class Application {
 					break;
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} while (!choice.equals("n"));
@@ -73,11 +72,12 @@ public class Application {
 		newHospital.addDoctor(doctor2);
 		newHospital.addDoctor(doctor3);
 
-		System.out.println();
-
-		// System.out.println(newHospital.fixAppointment(doctor1, patient1, "7:00"));
-		// System.out.println(newHospital.fixAppointment(doctor2, patient2, "7:00"));
-		// System.out.println(newHospital.fixAppointment(doctor2, patient3, "7:30"));
+		// System.out.println(newHospital.fixAppointment(doctor1, patient1,
+		// "7:00"));
+		// System.out.println(newHospital.fixAppointment(doctor2, patient2,
+		// "7:00"));
+		// System.out.println(newHospital.fixAppointment(doctor2, patient3,
+		// "7:30"));
 
 		return newHospital;
 

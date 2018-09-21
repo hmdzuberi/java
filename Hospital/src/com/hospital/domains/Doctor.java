@@ -44,7 +44,7 @@ public class Doctor {
 
 	@Override
 	public String toString() {
-		return "\n\nDoctor [doctorId=" + doctorId + ", doctorName=" + doctorName + ", specialization=" + specialization
+		return "\n--Doctor [doctorId=" + doctorId + ", doctorName=" + doctorName + ", specialization=" + specialization
 				+ "]";
 	}
 

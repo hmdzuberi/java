@@ -6,18 +6,26 @@ import java.util.HashSet;
 public class Hospital {
 
 	private String hospitalName;
-	private HashSet<Doctor> setOfDoctors = new HashSet<>();
-	private HashMap<Doctor, HashSet<Patient>> appointments = new HashMap<>();
-	private HashMap<String, HashSet<Doctor>> specializations = new HashMap<>();
+	private HashSet<Doctor> setOfDoctors;
+	private HashMap<Doctor, HashSet<Patient>> appointments;
+	private HashMap<String, HashSet<Doctor>> specializations;
 
 	public Hospital() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.hospitalName = "New Hospital";
+		init();
 	}
 
 	public Hospital(String hospitalName) {
 		super();
 		this.hospitalName = hospitalName;
+		init();
+	}
+
+	private void init() {
+		this.setOfDoctors = new HashSet<>();
+		this.appointments = new HashMap<>();
+		this.specializations = new HashMap<>();
 	}
 
 	public String getHospitalName() {
@@ -53,10 +61,10 @@ public class Hospital {
 
 			setOfDoctors = this.specializations.get(spec);
 
-			boolean var1 = setOfDoctors.add(doctor);
-			HashSet<Doctor> var2 = this.specializations.put(doctor.getSpecialization(), setOfDoctors);
+			boolean isDoctorAdded = setOfDoctors.add(doctor);
+			HashSet<Doctor> oldDoctorSet = this.specializations.put(doctor.getSpecialization(), setOfDoctors);
 
-			if (var1 && var2 != null) {
+			if (isDoctorAdded && oldDoctorSet != null) {
 				return "Doctor added and specialization updated";
 			} else {
 				return "Doctor added but failed to update specialization";
@@ -64,10 +72,10 @@ public class Hospital {
 
 		} else {
 
-			boolean var1 = setOfDoctors.add(doctor);
-			HashSet<Doctor> var2 = this.specializations.put(doctor.getSpecialization(), setOfDoctors);
+			boolean isDoctorAdded = setOfDoctors.add(doctor);
+			HashSet<Doctor> oldDoctorSet = this.specializations.put(doctor.getSpecialization(), setOfDoctors);
 
-			if (var1 && var2 == null) {
+			if (isDoctorAdded && oldDoctorSet == null) {
 				return "Doctor added and specialization updated";
 			} else {
 				return "Doctor added but failed to update specialization";
@@ -99,10 +107,10 @@ public class Hospital {
 			if (this.appointments.containsKey(doctorAppt)) {
 				setOfPatients = this.appointments.get(doctorAppt);
 
-				boolean var1 = setOfPatients.add(patient);
-				HashSet<Patient> var2 = this.appointments.put(doctorAppt, setOfPatients);
+				boolean isPatientAdded = setOfPatients.add(patient);
+				HashSet<Patient> oldDoctorAppointmentSet = this.appointments.put(doctorAppt, setOfPatients);
 
-				if (var1 && var2 != null) {
+				if (isPatientAdded && oldDoctorAppointmentSet != null) {
 					return "Appointment added";
 				} else {
 					return "Failed to add apointment";
@@ -110,10 +118,10 @@ public class Hospital {
 
 			} else {
 
-				boolean var1 = setOfPatients.add(patient);
-				HashSet<Patient> var2 = this.appointments.put(doctorAppt, setOfPatients);
+				boolean isPatientAdded = setOfPatients.add(patient);
+				HashSet<Patient> oldDoctorAppointmentSet = this.appointments.put(doctorAppt, setOfPatients);
 
-				if (var1 && var2 == null) {
+				if (isPatientAdded && oldDoctorAppointmentSet == null) {
 					return "Appointment added";
 				} else {
 					return "Failed to add apointment";
