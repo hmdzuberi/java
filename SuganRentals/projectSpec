@@ -1,0 +1,35 @@
+Sugan Rentals, provides the following items on rent for his customers
+
+1. Furniture
+2. Car
+3. Utensils
+4. Fans
+
+Rent for items are fixed on per day basis, Customer can take it for any number of days, if they take it for any number of days, if they take for more than 5 days 10% discount is given the rent.
+
+A customer can take one or more items on rent.
+
+If the items are available, the application should give a output showing the rental amount.
+
+On confirmation from the client a configuration message listing the items, rental duration and cost will be printed.
+
+
+Phase 2
+
+Store the list of all order and print the rental details of customer.
+
+Concepts to use:
+
+Classes
+Interfaces
+Polymorphism
+Inheritance
+Looping
+Decision Making
+Arrays
+Collections
+Exception Handling
+
+
+All input and handling the return type of methods should be in main method.
+Scanner should only be used in main method.
