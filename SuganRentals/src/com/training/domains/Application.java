@@ -9,9 +9,10 @@ public class Application {
 		Customer cust = new Customer("Hamaad", 1231231234);
 
 		Furniture item1 = new Furniture(2, 3);
-		Car item2 = new Car(1, 10);
+		Car item2 = new Car(1, 5);
 		Fan item3 = new Fan(2, 8);
 		Utensil item4 = new Utensil(5, 15);
+		Car item5 = new Car(2, 30);
 
 		Bill bill = new Bill(1234);
 
@@ -19,6 +20,7 @@ public class Application {
 		bill.addItemInBill(item2);
 		bill.addItemInBill(item3);
 		bill.addItemInBill(item4);
+		bill.addItemInBill(item5);
 		System.out.println(bill);
 
 		System.out.println(bill.getTotal());

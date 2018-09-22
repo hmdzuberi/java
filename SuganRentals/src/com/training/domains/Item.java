@@ -91,7 +91,16 @@ public abstract class Item implements Billable, Serializable {
 
 	@Override
 	public double getPrice() {
-		return this.rentalPrice * this.rentalDuration * this.itemQuantity;
+
+		double price = this.rentalPrice * this.rentalDuration * this.itemQuantity;
+		;
+
+		if (this.rentalDuration > 5) {
+			price *= 0.9;
+			System.out.println("discout for " + this);
+		}
+
+		return price;
 	}
 
 }
