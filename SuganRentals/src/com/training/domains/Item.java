@@ -93,7 +93,6 @@ public abstract class Item implements Billable, Serializable {
 	public double getPrice() {
 
 		double price = this.rentalPrice * this.rentalDuration * this.itemQuantity;
-		;
 
 		if (this.rentalDuration > 5) {
 			price *= 0.9;
