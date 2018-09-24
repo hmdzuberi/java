@@ -34,23 +34,23 @@ public class MovieDAOImpl implements MovieDAO {
 
 	@Override
 	public Movie findByPrimaryKey(long movieID) throws SQLException {
-	
+
 		Movie movie = null;
 		String sql = "select * from moviehz where movieID = ?";
 		PreparedStatement pstmnt = null;
-	
+
 		pstmnt = con.prepareStatement(sql);
 		pstmnt.setLong(1, movieID);
-	
+
 		ResultSet rs = pstmnt.executeQuery();
-	
+
 		if (rs.next()) {
-	
+
 			movie = convertToObject(rs);
 		}
-	
+
 		pstmnt.close();
-	
+
 		return movie;
 	}
 
@@ -69,7 +69,6 @@ public class MovieDAOImpl implements MovieDAO {
 		while (rs.next()) {
 
 			movie = convertToObject(rs);
-
 			movieList.add(movie);
 		}
 
@@ -80,22 +79,22 @@ public class MovieDAOImpl implements MovieDAO {
 
 	@Override
 	public int addMovie(Movie movie) throws SQLException {
-	
+
 		int rowAdded = 0;
 		String sql = "insert into moviehz values(?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = null;
-	
+
 		pstmt = con.prepareStatement(sql);
 		pstmt.setLong(1, movie.getMovieID());
 		pstmt.setString(2, movie.getMovieName());
 		pstmt.setString(3, movie.getDirector());
 		pstmt.setString(4, movie.getGenre());
 		pstmt.setDouble(5, movie.getRating());
-	
+
 		rowAdded = pstmt.executeUpdate();
-	
+
 		pstmt.close();
-	
+
 		return rowAdded;
 	}
 
@@ -135,7 +134,7 @@ public class MovieDAOImpl implements MovieDAO {
 	}
 
 	public void closeConnection() {
-	
+
 		try {
 			con.close();
 		} catch (SQLException e) {
