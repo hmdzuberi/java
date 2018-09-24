@@ -96,7 +96,7 @@ public abstract class Item implements Billable, Serializable {
 
 		if (this.rentalDuration > 5) {
 			price *= 0.9;
-			System.out.println("discout for " + this);
+			System.out.println("discount for " + this);
 		}
 
 		return price;
