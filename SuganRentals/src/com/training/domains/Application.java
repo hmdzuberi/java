@@ -8,7 +8,7 @@ public class Application {
 
 		Customer cust = new Customer("Hamaad", 1231231234);
 
-		Furniture item1 = new Furniture(2, 3);
+		Furniture item1 = new Furniture(-2, 3);
 		Car item2 = new Car(1, 5);
 		Fan item3 = new Fan(2, 8);
 		Utensil item4 = new Utensil(5, 15);

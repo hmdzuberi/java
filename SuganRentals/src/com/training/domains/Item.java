@@ -7,7 +7,7 @@ import com.training.interfaces.Billable;
 public abstract class Item implements Billable, Serializable {
 
 	private String itemName;
-	private double rentalPrice;
+	private double perDayRent;
 	private int itemQuantity;
 	private int rentalDuration;
 
@@ -15,10 +15,10 @@ public abstract class Item implements Billable, Serializable {
 		super();
 	}
 
-	public Item(String itemName, double rentalPrice, int itemQuantity, int rentalDuration) {
+	public Item(String itemName, double perDayRent, int itemQuantity, int rentalDuration) {
 		super();
 		this.itemName = itemName;
-		this.rentalPrice = rentalPrice;
+		this.perDayRent = perDayRent;
 		this.itemQuantity = itemQuantity;
 		this.rentalDuration = rentalDuration;
 	}
@@ -32,11 +32,11 @@ public abstract class Item implements Billable, Serializable {
 	}
 
 	public double getRentalPrice() {
-		return rentalPrice;
+		return perDayRent;
 	}
 
-	public void setRentalPrice(double rentalPrice) {
-		this.rentalPrice = rentalPrice;
+	public void setRentalPrice(double perDayRent) {
+		this.perDayRent = perDayRent;
 	}
 
 	public int getItemQuantity() {
@@ -85,13 +85,13 @@ public abstract class Item implements Billable, Serializable {
 
 	@Override
 	public String toString() {
-		return this.itemName + "," + this.itemQuantity + "," + this.rentalDuration + "," + this.rentalPrice;
+		return this.itemName + "," + this.itemQuantity + "," + this.rentalDuration + "," + this.perDayRent;
 	}
 
 	@Override
 	public double getPrice() {
 
-		double price = this.rentalPrice * this.rentalDuration * this.itemQuantity;
+		double price = this.perDayRent * this.rentalDuration * this.itemQuantity;
 
 		if (this.rentalDuration > 5) {
 			price *= 0.9;
