@@ -7,6 +7,10 @@ public class Customer implements Serializable {
 	private String customerName;
 	private long contactNumber;
 
+	public Customer() {
+		super();
+	}
+
 	public Customer(String customerName, long contactNumber) {
 		super();
 		this.customerName = customerName;

@@ -13,7 +13,6 @@ public abstract class Item implements Billable, Serializable {
 
 	public Item() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Item(String itemName, double rentalPrice, int itemQuantity, int rentalDuration) {

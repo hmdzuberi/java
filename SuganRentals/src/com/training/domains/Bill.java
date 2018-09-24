@@ -8,6 +8,10 @@ public class Bill implements Serializable {
 	private long invoiceNo;
 	private HashSet<Item> itemSet;
 
+	public Bill() {
+		super();
+	}
+
 	public Bill(long invoiceNo) {
 
 		this.invoiceNo = invoiceNo;
