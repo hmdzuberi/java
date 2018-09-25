@@ -27,10 +27,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 		student.setStudentID(rs.getLong("studentID"));
 		student.setStudentName(rs.getString("studentName"));
-		course.setCourseID(rs.getLong("courseID"));
-		course.setCourseName(rs.getString("courseName"));
-		student.setCourse(course);
-
+		// course.set
 		return student;
 	}
 
@@ -61,18 +58,12 @@ public class StudentDAOImpl implements StudentDAO {
 		PreparedStatement pstmt = con.prepareStatement(sql);
 
 		pstmt.setLong(1, student.getStudentID());
-		pstmt.setString(2, student.getStudentName());
-		pstmt.setLong(3, student.getCourse().getCourseID());
+		// pstmt.setString(2, student.getStudentName());
+		// pstmt.setLong(3, student.getCourse().getCourseID());
 
 		studentAdded = pstmt.executeUpdate();
 
 		return studentAdded;
-	}
-
-	@Override
-	public int updateCourse(long studentID, long courseID) throws SQLException {
-
-		return 0;
 	}
 
 	@Override

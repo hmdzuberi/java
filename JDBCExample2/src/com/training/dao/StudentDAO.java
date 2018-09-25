@@ -10,8 +10,6 @@ public interface StudentDAO {
 
 	public int addStudent(Student student) throws SQLException;
 
-	public int updateCourse(long studentID, long courseID) throws SQLException;
-
 	public int removeStudent(long studentID) throws SQLException;
 
 }

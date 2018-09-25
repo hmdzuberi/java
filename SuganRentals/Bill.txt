@@ -25,3 +25,12 @@ Bill Invoice Number: 1234
 5. Car - Quantity: 1, Rented for 5 days. Price: 750.0
 
 Total: 9844.5
+Bill Invoice Number: 1234
+
+1. Car - Quantity: 2, Rented for 30 days. Price: 8100.0
+2. Utensil - Quantity: 5, Rented for 15 days. Price: 1012.5
+3. Furniture - Quantity: -2, Rented for 3 days. Price: -450.0
+4. Fan - Quantity: 2, Rented for 8 days. Price: 432.0
+5. Car - Quantity: 1, Rented for 5 days. Price: 750.0
+
+Total: 9844.5
