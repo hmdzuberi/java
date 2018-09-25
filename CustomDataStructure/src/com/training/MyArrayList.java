@@ -62,7 +62,9 @@ public class MyArrayList<T> implements Iterable<T> {
 
 	@Override
 	public Iterator<T> iterator() {
+
 		return new Iterator<T>() {
+
 			private int index = 0;
 
 			@Override
@@ -79,7 +81,6 @@ public class MyArrayList<T> implements Iterable<T> {
 
 				return result;
 			}
-
 		};
 	}
 }
