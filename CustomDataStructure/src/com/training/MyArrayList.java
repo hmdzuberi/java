@@ -11,17 +11,19 @@ public class MyArrayList<T> implements Iterable<T> {
 
 	public MyArrayList() {
 		super();
+		this.elements = new Object[CAPACITY];
+		this.size = CAPACITY;
 	}
 
 	public MyArrayList(Object[] elements) {
-		super();
+		this();
 		this.size = elements.length;
 		this.elements = elements;
 	}
 
 	public int add(Object newElement) {
 
-		if (this.size == CAPACITY) {
+		if (this.elements.length == this.size) {
 			ensureCapacity();
 		}
 
@@ -82,5 +84,10 @@ public class MyArrayList<T> implements Iterable<T> {
 				return result;
 			}
 		};
+	}
+
+	@Override
+	public String toString() {
+		return "MyArrayList [size=" + size + ", elements=" + elements.length + "]";
 	}
 }
