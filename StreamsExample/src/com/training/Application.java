@@ -2,6 +2,8 @@ package com.training;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.training.domains.ManageProducts;
 import com.training.domains.Product;
@@ -31,7 +33,23 @@ public class Application {
 		// mgr.printProductByCategory("TV", productList);
 		// mgr.printProductNames(productList);
 		// mgr.printCategory(productList);
-		mgr.printSortedList(productList);
+		// mgr.printSortedList(productList);
+
+		// System.out.println(mgr.countProducts(productList));
+		// System.out.println(mgr.findMinPricedProduct(productList));
+		// System.out.println(mgr.findMaxPricedProduct(productList));
+		// System.out.println(mgr.findMinMax(productList, true));
+		// System.out.println(mgr.findMinMax(productList, false));
+
+		Map<String, Double> priceList = mgr.getPriceList(productList);
+		// System.out.println(priceList.get("Samsung TV"));
+
+		Set<Map.Entry<String, Double>> items = priceList.entrySet();
+		for (Map.Entry<String, Double> eachItem : items) {
+
+			System.out.println(eachItem.getKey());
+			System.out.println(eachItem.getValue());
+		}
 
 	}
 
