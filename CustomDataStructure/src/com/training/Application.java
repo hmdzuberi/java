@@ -5,9 +5,11 @@ import java.util.Iterator;
 public class Application {
 
 	public static void main(String[] args) {
+
 		MyArrayList<String> str = new MyArrayList<>();
 
 		try {
+
 			System.out.println(str.add("Hello"));
 			System.out.println(str.add("Hamaad"));
 			System.out.println(str.add("CenturyLink"));
@@ -23,6 +25,7 @@ public class Application {
 
 			str.remove(1);
 			System.out.println(str);
+
 		} catch (ArrayIndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
