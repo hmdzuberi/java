@@ -3,7 +3,7 @@ package com.training;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class MyArrayList<T> implements Iterable<T> {
+public class MyArrayList<E> implements Iterable<E> {
 
 	private int size;
 	private int maxIndex;
@@ -71,9 +71,9 @@ public class MyArrayList<T> implements Iterable<T> {
 	}
 
 	@Override
-	public Iterator<T> iterator() {
+	public Iterator<E> iterator() {
 
-		return new Iterator<T>() {
+		return new Iterator<E>() {
 
 			private int index = 0;
 
@@ -83,8 +83,8 @@ public class MyArrayList<T> implements Iterable<T> {
 			}
 
 			@Override
-			public T next() {
-				return (T) elements[index++];
+			public E next() {
+				return (E) elements[index++];
 			}
 		};
 	}
