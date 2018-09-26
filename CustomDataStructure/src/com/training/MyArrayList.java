@@ -5,32 +5,37 @@ import java.util.Iterator;
 
 public class MyArrayList<T> implements Iterable<T> {
 
-	private int size = 0;
+	private int size;
+	private int maxIndex;
 	private static final int CAPACITY = 10;
 	private Object[] elements;
 
 	public MyArrayList() {
 		super();
-		this.elements = new Object[CAPACITY];
 		this.size = CAPACITY;
+		this.elements = new Object[CAPACITY];
+		this.maxIndex = 0;
 	}
 
 	public MyArrayList(Object[] elements) {
 		this();
 		this.size = elements.length;
+		this.maxIndex = elements.length - 1;
 		this.elements = elements;
 	}
 
 	public int add(Object newElement) {
 
-		if (this.elements.length == this.size) {
+		int result = 0;
+
+		if (this.maxIndex == this.size) {
 			ensureCapacity();
 		}
 
-		this.elements[size] = newElement;
-		size++;
+		this.elements[this.maxIndex++] = newElement;
+		result = 1;
 
-		return 1;
+		return result;
 	}
 
 	private void ensureCapacity() {
@@ -41,7 +46,7 @@ public class MyArrayList<T> implements Iterable<T> {
 
 	public Object get(int index) throws ArrayIndexOutOfBoundsException {
 
-		if (index > this.size)
+		if (index > this.maxIndex)
 			throw new ArrayIndexOutOfBoundsException();
 
 		return this.elements[index];
@@ -49,17 +54,20 @@ public class MyArrayList<T> implements Iterable<T> {
 
 	public int remove(int index) throws ArrayIndexOutOfBoundsException {
 
-		if (index > this.size)
+		int result = 0;
+
+		if (index > this.maxIndex)
 			throw new ArrayIndexOutOfBoundsException();
 
-		for (int i = 0; i < this.size; i++) {
+		for (int i = 0; i < this.maxIndex; i++) {
 			if (i >= index)
 				this.elements[i] = this.elements[i + 1];
 		}
 
-		this.size--;
+		this.maxIndex--;
+		result = 1;
 
-		return 1;
+		return result;
 	}
 
 	@Override
@@ -71,23 +79,19 @@ public class MyArrayList<T> implements Iterable<T> {
 
 			@Override
 			public boolean hasNext() {
-				return (index < size && elements[index] != null);
+				return (index < maxIndex && elements[index] != null);
 			}
 
 			@Override
 			public T next() {
-				T result = null;
-
-				if (!hasNext())
-					result = (T) elements[index++];
-
-				return result;
+				return (T) elements[index++];
 			}
 		};
 	}
 
 	@Override
 	public String toString() {
-		return "MyArrayList [size=" + size + ", elements=" + elements.length + "]";
+		return "MyArrayList [size=" + size + ", elements=" + Arrays.toString(elements) + ", maxIndex=" + maxIndex + "]";
 	}
+
 }
