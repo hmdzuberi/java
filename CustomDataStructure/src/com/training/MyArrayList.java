@@ -28,7 +28,7 @@ public class MyArrayList<E> implements Iterable<E> {
 
 		int result = 0;
 
-		if (this.maxIndex == this.size) {
+		if (this.maxIndex == this.size - 1) {
 			ensureCapacity();
 		}
 
