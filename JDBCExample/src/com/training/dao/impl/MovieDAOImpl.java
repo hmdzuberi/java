@@ -11,7 +11,7 @@ import com.training.entity.Movie;
 import com.training.entity.MovieDAO;
 import com.training.utils.DbConnection;
 
-public class MovieDAOImpl implements MovieDAO {
+public class MovieDAOImpl implements MovieDAO<Movie> {
 
 	private Connection con;
 
@@ -78,7 +78,7 @@ public class MovieDAOImpl implements MovieDAO {
 	}
 
 	@Override
-	public int addMovie(Movie movie) throws SQLException {
+	public int add(Movie movie) throws SQLException {
 
 		int rowAdded = 0;
 		String sql = "insert into moviehz values(?, ?, ?, ?, ?)";

@@ -15,7 +15,7 @@ public class Application {
 		System.out.println(DbConnection.getOracleConnection());
 
 		int key = 5;
-		MovieDAO dao = new MovieDAOImpl();
+		MovieDAO<Movie> dao = new MovieDAOImpl();
 
 		try {
 			switch (key) {
@@ -23,8 +23,8 @@ public class Application {
 				Movie gold = new Movie(101, "Gold", "Reema Kagti", "Historical", 4.8);
 				Movie sholay = new Movie(103, "Sholay", "Ramesh Sippy", "Action-Adventure", 4.9);
 
-				int rowAdded = dao.addMovie(gold);
-				rowAdded += dao.addMovie(sholay);
+				int rowAdded = dao.add(gold);
+				rowAdded += dao.add(sholay);
 
 				System.out.println(rowAdded + ": Row Added");
 
