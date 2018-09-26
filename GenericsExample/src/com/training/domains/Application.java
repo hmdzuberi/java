@@ -1,6 +1,6 @@
 package com.training.domains;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
@@ -18,13 +18,21 @@ public class Application {
 		System.out.println(marks.getList() + "," + marks.getDigit());
 		System.out.println(age.getList() + "," + age.getDigit());
 
-		List<Integer> englishMarks = Arrays.asList(20, 30, 40);
-		List<Double> mathMarks = Arrays.asList(20.03, 30.40, 40.5);
+		List<Integer> englishMarks = new ArrayList<>();
+		List<Double> mathMarks = new ArrayList<>();
 
-		System.out.println(showNumbers(englishMarks));
-		System.out.println(showNumbers(mathMarks));
+		englishMarks.add(20);
+		englishMarks.add(27);
 
-		List<Object> studentList = Arrays.asList(new Boolean(true), new Boolean(false), new Boolean(true));
+		// System.out.println(showNumbers(englishMarks));
+		// System.out.println(showNumbers(mathMarks));
+
+		// List<Object> studentList = Arrays.asList(new Boolean(true), new
+		// Boolean(false), new Boolean(true));
+		List<Object> studentList = new ArrayList<>();
+
+		studentList.add(new Boolean(true));
+		studentList.add(new Boolean(false));
 
 		print(studentList);
 		print(englishMarks);
@@ -36,7 +44,9 @@ public class Application {
 
 		addToList(englishMarks);
 		// addToList(mathMarks);
-		addToList(studentList);
+		// addToList(studentList);
+
+		System.out.println(englishMarks);
 
 	}
 
@@ -61,7 +71,7 @@ public class Application {
 	// Generic Method 4 - Consumer
 	public static void addToList(List<? super Integer> list) {
 
-		list.set(2, 7);
+		list.add(32);
 	}
 
 }
