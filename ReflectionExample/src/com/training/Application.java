@@ -13,26 +13,21 @@ public class Application {
 
 			diamond.setMovieID(203);
 			diamond.setMovieName("Titanic");
-
 			System.out.println(diamond);
 
 			Constructor<?>[] constructorList = cls.getDeclaredConstructors();
-
 			for (Constructor<?> constructor : constructorList) {
 				System.out.println("Name: " + constructor.getName());
 				System.out.println("Parameter Count: " + constructor.getParameterCount());
 			}
 
 			Method addRatingMethod = cls.getDeclaredMethod("addRating", int.class);
-
 			System.out.println("Add Rating Method Reference: " + addRatingMethod);
 
 			String result = (String) addRatingMethod.invoke(cls, new Integer(20));
-
 			System.out.println(result);
 
 			Method[] methodList = cls.getDeclaredMethods();
-
 			for (Method eachMethod : methodList) {
 				System.out.println(eachMethod.getName());
 			}
