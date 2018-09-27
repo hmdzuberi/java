@@ -36,17 +36,13 @@ public class MyMap<K, V> {
 		V oldValue = null;
 
 		if (key != null) {
-			int i = 0;
 
-			while (oldValue == null && i < maxIndex && mapEntries[i] != null) {
-
+			for (int i = 0; i < maxIndex && oldValue == null && mapEntries[i] == null; i++) {
 				if (mapEntries[i].getKey() == key) {
 					oldValue = mapEntries[i].getValue();
 					mapEntries[i].setKey(key);
 					mapEntries[i].setValue(value);
 				}
-
-				i++;
 			}
 
 			if (oldValue == null) {
@@ -65,14 +61,11 @@ public class MyMap<K, V> {
 		V value = null;
 
 		if (key != null) {
-			int i = 0;
 
-			while (value == null && i < size) {
+			for (int i = 0; value == null && i < size; i++) {
 				if (mapEntries[i].getKey() == key) {
 					value = mapEntries[i].getValue();
 				}
-
-				i++;
 			}
 		}
 
