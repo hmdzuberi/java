@@ -1,16 +1,26 @@
 package com.training;
 
+import java.util.List;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class MyParser extends DefaultHandler {
 
+	private List<Employee> employeeList;
+	private Employee employee;
+
+	private boolean bAge;
+	private boolean bName;
+	private boolean bGender;
+	private boolean bRole;
+
 	// https://www.journaldev.com/1198/java-sax-parser-example
 	@Override
 	public void startDocument() throws SAXException {
 
-		super.startDocument();
+		System.out.println("Start Document");
 	}
 
 	@Override
@@ -33,6 +43,6 @@ public class MyParser extends DefaultHandler {
 	@Override
 	public void endDocument() throws SAXException {
 
-		super.endDocument();
+		System.out.println("End Document");
 	}
 }
