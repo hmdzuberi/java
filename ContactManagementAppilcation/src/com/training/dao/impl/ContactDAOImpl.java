@@ -23,11 +23,12 @@ public class ContactDAOImpl implements ContactDAO {
 
 	private List<Contact> convertToContactList(ResultSet rs) throws SQLException {
 
-		boolean contactExists = false;
+		boolean contactExists;
 		List<Contact> contactList = new ArrayList<>();
 
 		while (rs.next()) {
 
+			contactExists = false;
 			Contact contact = new Contact();
 
 			contact.setContactID(rs.getLong("contactID"));
@@ -139,7 +140,7 @@ public class ContactDAOImpl implements ContactDAO {
 	@Override
 	public List<Contact> getAllContacts() throws SQLException {
 
-		String sql = "select * from hz_contactdetails natural join hz_phonenumbers";
+		String sql = "select * from hz_contactdetails natural join hz_phonenumbers order by contactName";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 
 		ResultSet rs = pstmt.executeQuery();
@@ -150,7 +151,7 @@ public class ContactDAOImpl implements ContactDAO {
 	@Override
 	public List<Contact> getContactsbyName(String contactName) throws SQLException {
 
-		String sql = "select * from hz_contactdetails natural join hz_phonenumbers where contactName = ?";
+		String sql = "select * from hz_contactdetails natural join hz_phonenumbers where contactName = ? order by contactName";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 
 		pstmt.setString(1, contactName);
@@ -163,7 +164,7 @@ public class ContactDAOImpl implements ContactDAO {
 	@Override
 	public List<Contact> getContactsByRelation(String relation) throws SQLException {
 
-		String sql = "select * from hz_contactdetails natural join hz_phonenumbers where relation = ?";
+		String sql = "select * from hz_contactdetails natural join hz_phonenumbers where relation = ? order by contactName";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 
 		pstmt.setString(1, relation);
@@ -171,6 +172,25 @@ public class ContactDAOImpl implements ContactDAO {
 		ResultSet rs = pstmt.executeQuery();
 
 		return convertToContactList(rs);
+	}
+
+	@Override
+	public int addToExistingContact(long contactID, ContactNumber contactNumber) throws SQLException {
+
+		int phoneNumberAdded = 0;
+
+		String sql = "insert into hz_phonenumbers values (?, ?, ?)";
+		PreparedStatement pstmt2 = con.prepareStatement(sql);
+
+		pstmt2.setLong(2, contactID);
+		pstmt2.setLong(1, contactNumber.getPhoneNumber());
+		pstmt2.setString(3, contactNumber.getContactType());
+
+		phoneNumberAdded += pstmt2.executeUpdate();
+
+		System.out.println(phoneNumberAdded + ": phone numbers added");
+
+		return phoneNumberAdded;
 	}
 
 }

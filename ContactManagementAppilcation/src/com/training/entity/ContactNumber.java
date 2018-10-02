@@ -6,9 +6,25 @@ public class ContactNumber {
 	private long phoneNumber;
 
 	public ContactNumber(String contactType, long phoneNumber) {
-		super();
-		this.contactType = contactType;
-		this.phoneNumber = phoneNumber;
+
+		if (validPhoneNumber(phoneNumber)) {
+			this.phoneNumber = phoneNumber;
+			this.contactType = contactType;
+		} else {
+			System.out.println("Invalid Phone Number");
+		}
+
+	}
+
+	private boolean validPhoneNumber(Long phoneNumber) {
+
+		boolean isValid = false;
+
+		if (phoneNumber.toString().length() == 10) {
+			isValid = true;
+		}
+
+		return isValid;
 	}
 
 	public ContactNumber() {
@@ -32,13 +48,17 @@ public class ContactNumber {
 
 	public void setPhoneNumber(long phoneNumber) {
 
-		this.phoneNumber = phoneNumber;
+		if (validPhoneNumber(phoneNumber)) {
+			this.phoneNumber = phoneNumber;
+		} else {
+			System.out.println("Invalid Phone Number");
+		}
 	}
 
 	@Override
 	public String toString() {
 
-		return "ContactNumber [contactType=" + contactType + ", phoneNumber=" + phoneNumber + "]";
+		return "(" + contactType + ": " + phoneNumber + ")";
 	}
 
 }

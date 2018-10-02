@@ -18,7 +18,7 @@ public class Contact {
 
 	public Contact(long contactID, String contactName, String emailID, String relation,
 			List<ContactNumber> contactNumbers) {
-		super();
+
 		this.contactID = contactID;
 		this.contactName = contactName;
 		this.emailID = emailID;
@@ -84,8 +84,8 @@ public class Contact {
 	@Override
 	public String toString() {
 
-		return "Contact [contactID=" + contactID + ", contactName=" + contactName + ", emailID=" + emailID
-				+ ", relation=" + relation + ", contactNumbers=" + contactNumbers + "]\n";
+		return "\nContact Name: " + contactName + ", Email ID: " + emailID + ", Relation: " + relation
+				+ "\nContact Numbers: " + contactNumbers + "\n";
 	}
 
 }
