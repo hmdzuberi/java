@@ -1,5 +1,6 @@
 package com.training.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Contact {
@@ -12,6 +13,7 @@ public class Contact {
 
 	public Contact() {
 		super();
+		contactNumbers = new ArrayList<>();
 	}
 
 	public Contact(long contactID, String contactName, String emailID, String relation,
@@ -72,6 +74,18 @@ public class Contact {
 	public void setContactNumbers(List<ContactNumber> contactNumbers) {
 
 		this.contactNumbers = contactNumbers;
+	}
+
+	public void addContactNumber(ContactNumber contactNumber) {
+
+		this.contactNumbers.add(contactNumber);
+	}
+
+	@Override
+	public String toString() {
+
+		return "Contact [contactID=" + contactID + ", contactName=" + contactName + ", emailID=" + emailID
+				+ ", relation=" + relation + ", contactNumbers=" + contactNumbers + "]\n";
 	}
 
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.training.dao.ContactDAO;
@@ -20,9 +21,38 @@ public class ContactDAOImpl implements ContactDAO {
 		con = DbConnection.getOracleConnection();
 	}
 
-	public Contact convertToObject(ResultSet rs) throws SQLException {
+	private List<Contact> convertToContactList(ResultSet rs) throws SQLException {
 
-		return null;
+		boolean contactExists = false;
+		List<Contact> contactList = new ArrayList<>();
+
+		while (rs.next()) {
+
+			Contact contact = new Contact();
+
+			contact.setContactID(rs.getLong("contactID"));
+			contact.setContactName(rs.getString("contactName"));
+			contact.setEmailID(rs.getString("emailID"));
+			contact.setRelation(rs.getString("relation"));
+
+			String contactType = rs.getString("contactType");
+			long phoneNumber = rs.getLong("phoneNo");
+
+			ContactNumber contactNumber = new ContactNumber(contactType, phoneNumber);
+
+			for (Contact existingContact : contactList)
+				if (contact.getContactID() == existingContact.getContactID()) {
+					contactExists = true;
+					existingContact.addContactNumber(contactNumber);
+				}
+
+			if (!contactExists) {
+				contact.addContactNumber(contactNumber);
+				contactList.add(contact);
+			}
+		}
+
+		return contactList;
 	}
 
 	@Override
@@ -68,19 +98,19 @@ public class ContactDAOImpl implements ContactDAO {
 		int contactRemoved = 0;
 		int phoneNumberRemoved = 0;
 
-		String sql1 = "delete from hz_contactdetails where contactID = ?";
-		PreparedStatement pstmt1 = con.prepareStatement(sql1);
-
-		pstmt1.setLong(1, contactID);
-		contactRemoved = pstmt1.executeUpdate();
-		System.out.println(contactRemoved + ": contact removed");
-
 		String sql2 = "delete from hz_phonenumbers where contactID = ?";
 		PreparedStatement pstmt2 = con.prepareStatement(sql2);
 
 		pstmt2.setLong(1, contactID);
 		phoneNumberRemoved = pstmt2.executeUpdate();
 		System.out.println(phoneNumberRemoved + ": phone numbers removed");
+
+		String sql1 = "delete from hz_contactdetails where contactID = ?";
+		PreparedStatement pstmt1 = con.prepareStatement(sql1);
+
+		pstmt1.setLong(1, contactID);
+		contactRemoved = pstmt1.executeUpdate();
+		System.out.println(contactRemoved + ": contact removed");
 
 		if (contactRemoved != 0 && phoneNumberRemoved != 0)
 			return contactRemoved;
@@ -89,9 +119,19 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public int modifyContact(String contactName) throws SQLException {
+	public int modifyContact(long contactID, String propertyToEdit, String newValue) throws SQLException {
 
 		int contactModified = 0;
+
+		String sql = "update hz_contactdetails set " + propertyToEdit + " = ? where contactID = ?";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+
+		// pstmt.setString(1, propertyToEdit);
+		pstmt.setString(1, newValue);
+		pstmt.setLong(2, contactID);
+
+		contactModified = pstmt.executeUpdate();
+		System.out.println(contactModified + ": contact modified");
 
 		return contactModified;
 	}
@@ -99,24 +139,38 @@ public class ContactDAOImpl implements ContactDAO {
 	@Override
 	public List<Contact> getAllContacts() throws SQLException {
 
-		List<Contact> contactList = null;
+		String sql = "select * from hz_contactdetails natural join hz_phonenumbers";
+		PreparedStatement pstmt = con.prepareStatement(sql);
 
-		return contactList;
+		ResultSet rs = pstmt.executeQuery();
+
+		return convertToContactList(rs);
 	}
 
 	@Override
-	public List<Contact> getByRelation() throws SQLException {
+	public List<Contact> getContactsbyName(String contactName) throws SQLException {
 
-		List<Contact> contactListByRelation = null;
+		String sql = "select * from hz_contactdetails natural join hz_phonenumbers where contactName = ?";
+		PreparedStatement pstmt = con.prepareStatement(sql);
 
-		return contactListByRelation;
+		pstmt.setString(1, contactName);
+
+		ResultSet rs = pstmt.executeQuery();
+
+		return convertToContactList(rs);
 	}
 
 	@Override
-	public Contact getContact() throws SQLException {
+	public List<Contact> getContactsByRelation(String relation) throws SQLException {
 
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from hz_contactdetails natural join hz_phonenumbers where relation = ?";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+
+		pstmt.setString(1, relation);
+
+		ResultSet rs = pstmt.executeQuery();
+
+		return convertToContactList(rs);
 	}
 
 }

@@ -11,12 +11,12 @@ public interface ContactDAO {
 
 	public int removeContact(long contactID) throws SQLException;
 
-	public int modifyContact(String contactName) throws SQLException;
+	public int modifyContact(long contactID, String propertyToEdit, String newValue) throws SQLException;
 
-	public Contact getContact() throws SQLException;
+	public List<Contact> getContactsbyName(String contactName) throws SQLException;
 
 	public List<Contact> getAllContacts() throws SQLException;
 
-	public List<Contact> getByRelation() throws SQLException;
+	public List<Contact> getContactsByRelation(String relation) throws SQLException;
 
 }

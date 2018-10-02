@@ -35,4 +35,10 @@ public class ContactNumber {
 		this.phoneNumber = phoneNumber;
 	}
 
+	@Override
+	public String toString() {
+
+		return "ContactNumber [contactType=" + contactType + ", phoneNumber=" + phoneNumber + "]";
+	}
+
 }
