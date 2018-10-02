@@ -186,7 +186,7 @@ public class ContactDAOImpl implements ContactDAO {
 		pstmt2.setLong(1, contactNumber.getPhoneNumber());
 		pstmt2.setString(3, contactNumber.getContactType());
 
-		phoneNumberAdded += pstmt2.executeUpdate();
+		phoneNumberAdded = pstmt2.executeUpdate();
 
 		System.out.println(phoneNumberAdded + ": phone numbers added");
 
