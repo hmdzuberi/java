@@ -1,0 +1,122 @@
+package com.training.dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.training.dao.ContactDAO;
+import com.training.entity.Contact;
+import com.training.entity.ContactNumber;
+import com.training.utils.DbConnection;
+
+public class ContactDAOImpl implements ContactDAO {
+
+	private Connection con;
+
+	public ContactDAOImpl() {
+
+		con = DbConnection.getOracleConnection();
+	}
+
+	public Contact convertToObject(ResultSet rs) throws SQLException {
+
+		return null;
+	}
+
+	@Override
+	public int addContact(Contact contact) throws SQLException {
+
+		int contactAdded = 0;
+		int phoneNumberAdded = 0;
+
+		String sql1 = "insert into hz_contactdetails values (?, ?, ?, ?)";
+		PreparedStatement pstmt1 = con.prepareStatement(sql1);
+
+		pstmt1.setLong(1, contact.getContactID());
+		pstmt1.setString(2, contact.getContactName());
+		pstmt1.setString(3, contact.getEmailID());
+		pstmt1.setString(4, contact.getRelation());
+
+		contactAdded = pstmt1.executeUpdate();
+		System.out.println(contactAdded + ": contact added");
+
+		String sql2 = "insert into hz_phonenumbers values (?, ?, ?)";
+		PreparedStatement pstmt2 = con.prepareStatement(sql2);
+
+		pstmt2.setLong(2, contact.getContactID());
+
+		for (ContactNumber contactNumber : contact.getContactNumbers()) {
+			pstmt2.setLong(1, contactNumber.getPhoneNumber());
+			pstmt2.setString(3, contactNumber.getContactType());
+
+			phoneNumberAdded += pstmt2.executeUpdate();
+		}
+
+		System.out.println(phoneNumberAdded + ": phone numbers added");
+
+		if (contactAdded != 0 && phoneNumberAdded != 0)
+			return contactAdded;
+		else
+			return 0;
+	}
+
+	@Override
+	public int removeContact(long contactID) throws SQLException {
+
+		int contactRemoved = 0;
+		int phoneNumberRemoved = 0;
+
+		String sql1 = "delete from hz_contactdetails where contactID = ?";
+		PreparedStatement pstmt1 = con.prepareStatement(sql1);
+
+		pstmt1.setLong(1, contactID);
+		contactRemoved = pstmt1.executeUpdate();
+		System.out.println(contactRemoved + ": contact removed");
+
+		String sql2 = "delete from hz_phonenumbers where contactID = ?";
+		PreparedStatement pstmt2 = con.prepareStatement(sql2);
+
+		pstmt2.setLong(1, contactID);
+		phoneNumberRemoved = pstmt2.executeUpdate();
+		System.out.println(phoneNumberRemoved + ": phone numbers removed");
+
+		if (contactRemoved != 0 && phoneNumberRemoved != 0)
+			return contactRemoved;
+		else
+			return 0;
+	}
+
+	@Override
+	public int modifyContact(String contactName) throws SQLException {
+
+		int contactModified = 0;
+
+		return contactModified;
+	}
+
+	@Override
+	public List<Contact> getAllContacts() throws SQLException {
+
+		List<Contact> contactList = null;
+
+		return contactList;
+	}
+
+	@Override
+	public List<Contact> getByRelation() throws SQLException {
+
+		List<Contact> contactListByRelation = null;
+
+		return contactListByRelation;
+	}
+
+	@Override
+	public Contact getContact() throws SQLException {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
