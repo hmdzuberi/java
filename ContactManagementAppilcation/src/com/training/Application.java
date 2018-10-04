@@ -16,9 +16,9 @@ public class Application {
 
 		System.out.println(DbConnection.getOracleConnection());
 
-		long phoneNumber = Long.parseLong("1234567890");
+		long phoneNumber = Long.parseLong("9876553422");
 
-		ContactNumber contactNumber1 = new ContactNumber("Home", phoneNumber);
+		ContactNumber contactNumber1 = new ContactNumber("Office", phoneNumber);
 		List<ContactNumber> contactNumbers = Arrays.asList(contactNumber1);
 
 		Contact contact1 = new Contact(10003, "Hamaad", "hamaad@gmail.com", "Family", contactNumbers);
@@ -34,10 +34,12 @@ public class Application {
 
 			// contactDAO.addToExistingContact(10003, contactNumber1);
 
-			System.out.println(contactDAO.getAllContacts());
-
 			// System.out.println(contactDAO.getContactsbyName("Hamaad"));
 			// System.out.println(contactDAO.getContactsByRelation("Family"));
+
+			// System.out.println(contactDAO.addToExistingContact(10003,
+			// contactNumber1));
+			System.out.println(contactDAO.getAllContacts());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
