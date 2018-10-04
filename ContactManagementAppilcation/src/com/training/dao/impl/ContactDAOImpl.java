@@ -164,7 +164,7 @@ public class ContactDAOImpl implements ContactDAO {
 	@Override
 	public List<Contact> getContactsByRelation(String relation) throws SQLException {
 
-		String sql = "select * from hz_contactdetails natural join hz_phonenumbers where relation = ? order by contactName";
+		String sql = "select * from hz_contactdetails natural join hz_phonenumbers where relation = ? order by relation, contactName";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 
 		pstmt.setString(1, relation);
@@ -180,17 +180,31 @@ public class ContactDAOImpl implements ContactDAO {
 		int phoneNumberAdded = 0;
 
 		String sql = "insert into hz_phonenumbers values (?, ?, ?)";
-		PreparedStatement pstmt2 = con.prepareStatement(sql);
+		PreparedStatement pstmt = con.prepareStatement(sql);
 
-		pstmt2.setLong(2, contactID);
-		pstmt2.setLong(1, contactNumber.getPhoneNumber());
-		pstmt2.setString(3, contactNumber.getContactType());
+		pstmt.setLong(2, contactID);
+		pstmt.setLong(1, contactNumber.getPhoneNumber());
+		pstmt.setString(3, contactNumber.getContactType());
 
-		phoneNumberAdded = pstmt2.executeUpdate();
+		phoneNumberAdded = pstmt.executeUpdate();
 
 		System.out.println(phoneNumberAdded + ": phone numbers added");
 
 		return phoneNumberAdded;
+	}
+
+	@Override
+	public void getRelationCount() throws SQLException {
+
+		String sql = "SELECT relation, COUNT(*) FROM HZ_CONTACTDETAILS GROUP BY relation";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			System.out.println(rs.getString(1) + ": " + rs.getInt(2));
+		}
+
 	}
 
 }

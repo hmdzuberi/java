@@ -1,5 +1,6 @@
 package com.training;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +15,8 @@ public class Application {
 
 	public static void main(String[] args) {
 
-		System.out.println(DbConnection.getOracleConnection());
+		Connection con = DbConnection.getOracleConnection();
+		System.out.println(con);
 
 		long phoneNumber = Long.parseLong("9876553422");
 
@@ -39,10 +41,17 @@ public class Application {
 
 			// System.out.println(contactDAO.addToExistingContact(10003,
 			// contactNumber1));
-			System.out.println(contactDAO.getAllContacts());
+			// System.out.println(contactDAO.getAllContacts());
+			contactDAO.getRelationCount();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}

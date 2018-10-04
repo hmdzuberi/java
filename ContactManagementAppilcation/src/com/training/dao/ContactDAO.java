@@ -22,4 +22,6 @@ public interface ContactDAO {
 
 	public List<Contact> getContactsByRelation(String relation) throws SQLException;
 
+	public void getRelationCount() throws SQLException;
+
 }
